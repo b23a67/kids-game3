@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>颜色配对游戏</title>
+    <style>
+        body { text-align: center; font-family: Arial; }
+        #target { width: 150px; height: 150px; margin: 20px auto; border: 2px solid #000; }
+        .color-btn { width: 80px; height: 80px; margin: 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>颜色配对</h1>
+    <div id="target"></div>
+    <div>
+        <button class="color-btn" style="background: red;"></button>
+        <button class="color-btn" style="background: blue;"></button>
+        <button class="color-btn" style="background: yellow;"></button>
+        <button class="color-btn" style="background: green;"></button>
+    </div>
+    <p>得分: <span id="score">0</span></p>
+
+    <script>
+        const target = document.getElementById('target');
+        const scoreEl = document.getElementById('score');
+        const colors = ['red', 'blue', 'yellow', 'green'];
+        let score = 0;
+        let currentColor;
+
+        function setRandomColor() {
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            target.style.backgroundColor = currentColor;
+        }
+
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const btnColor = btn.style.backgroundColor;
+                if (btnColor === currentColor) {
+                    score++;
+                    scoreEl.textContent = score;
+                    alert('正确！');
+                    setRandomColor();
+                } else {
+                    alert('再试试！');
+                }
+            });
+        });
+
+        setRandomColor();
+    </script>
+</body>
+</html>
